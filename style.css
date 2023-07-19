@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-size: 10px;
+    background-color: #ffc600;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Amatic SC', cursive;
+}
+
+h1 {
+    text-align: center;
+    font-size: 10rem;
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.score {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0 3rem;
+    line-height: 1;
+    border-radius: 1rem;
+    transition: .5s all;
+    filter: drop-shadow(10px 10px 2px transparent);
+}
+
+.score:hover {
+    filter: drop-shadow(10px 10px 2px black);
+}
+
+.game {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.hole {
+    flex: 1 0 33.33%;
+    overflow: hidden;
+    position: relative;
+}
+
+.hole::after {
+    display: block;
+    background: url('./img/dirt.svg') bottom center no-repeat;
+    background-size: contain;
+    content: '';
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    z-index: 2;
+    bottom: -30px;
+}
+
+.mole {
+    background: url('./img/mole.svg') bottom center no-repeat;
+    background-size: 60%;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    transition: .4s all;
+}
+
+.hole.up .mole {
+    top: 0;
+}
+
+.btn-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+}
+
+.btn-game {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 15px 20px;
+    border: 1px solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 60px;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-family: 'Amatic SC', cursive;
+    transform: rotate(70deg);
+    filter: drop-shadow(10px 10px 2px black);
+    cursor: pointer;
+    transition: .4s all;
+    transform: scale(1);
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+}
+
+.btn-game::after {
+    position: absolute;
+    content: '';
+    background-image: url('./img/mole.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 60px;
+    top: 0%;
+    /* измените значение top, чтобы картинка была скрыта за пределами кнопки */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    transition: .3s ease-out;
+    opacity: 0;
+}
+
+.btn-game:hover {
+    transform: scale(.8) rotate(8deg);
+    filter: drop-shadow(5px 5px 3px black);
+}
+
+.btn-game:hover::after {
+    top: -100%;
+    opacity: 1;
+}
+
+.score-list {
+    display: none;
+    margin: 0 auto;
+}
+
+li {
+    background-color: rgba(255, 255, 255, 0.564);
+    width: 80%;
+    height: 30px;
+    border-radius: 30px;
+    margin: 15px 0;
+    min-height: max-content;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 10rem;
+}
+
+.new-score {
+    display: flex;
+    align-items: center;
+    padding: 5px 40px;
+    font-size: 5rem;
+    min-height: 50px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    height: max-content;
+    padding: 15px;
+}
+
+.new-score:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.264);
+}
+
+#form {
+    border: 3px solid rgb(163, 128, 1);
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.264);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 60px;
+    position: relative;
+}
+
+.warning {
+    position: relative;
+    transition: .5s all;
+    opacity: 0;
+}
+
+.warning::after {
+    content: 'Minimun 5 char';
+    background: url('./img/thunder.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: -188px;
+    right: -828px;
+    font-size: 30px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(.7);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+
+    }
+}
+
+#playerName {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Amatic SC', cursive;
+    border: 1px solid transparent;
+    font-size: 28px;
+    transition: 1.2s all;
+    border-radius: 15px;
+    padding-left: 15px;
+    text-align: left;
+}
+
+#playerName::placeholder {
+    font-size: 28px;
+    font-family: 'Amatic SC', cursive;
+    text-align: left;
+    transition: .7s all;
+    /* filter: drop-shadow(10px 10px 2px rgb(135, 135, 135)); */
+}
+
+#playerName:focus {
+    border: 2px dashed rgb(163, 128, 1);
+    width: 100%;
+    transition: .7s all;
+
+}
+
+#playerName:focus::placeholder {
+    text-align: center;
+}
+
+.star {
+    position: relative;
+}
+
+.star::after {
+    position: absolute;
+    content: '';
+    background: url(./img/gift.png);
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 50px;
+}
